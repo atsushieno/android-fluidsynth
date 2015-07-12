@@ -1,0 +1,2 @@
+
+home_dir=os.environ['PWD'] + '/../..'

@@ -1,0 +1,9 @@
+[submodule "external/fluidsynth"]
+	path = external/fluidsynth
+	url = git://git.code.sf.net/p/fluidsynth/code-git
+[submodule "external/android-cmake"]
+	path = external/android-cmake
+	url = https://github.com/taka-no-me/android-cmake.git
+[submodule "external/cerbero"]
+	path = external/cerbero
+	url = https://gitcafe.com/atsushieno/cerbero.git
