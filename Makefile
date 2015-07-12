@@ -5,7 +5,7 @@ all: build
 
 .PHONY: prepare
 prepare: external/cerbero
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled bootstrap
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc bootstrap
 
 external/cerbero:
 	git submodule init
