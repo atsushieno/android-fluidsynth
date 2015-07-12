@@ -1,2 +1,2 @@
 
-home_dir=os.environ['PWD'] + '/../..'
+home_dir=os.environ['PWD'] + '/../../build'

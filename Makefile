@@ -3,11 +3,15 @@ CENV=CERBERO_LOCAL_CONFIG=../../custom.cbc
 
 all: build
 
-prepare:
+.PHONY: prepare
+prepare: external/cerbero
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled bootstrap
 
-.PHONY: build
+external/cerbero:
+	git submodule init
+	git submodule update --recursive
 
+.PHONY: build
 build: prepare-copy
 	cd libs/armeabi-v7a && ../../rewrite-binary.sh
 	cd libs/x86 && ../../rewrite-binary.sh
@@ -28,6 +32,5 @@ clean:
 	rm -rf libs
 
 distclean:
-	make -C clean
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc wipe --build-tools
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc wipe --build-tools
