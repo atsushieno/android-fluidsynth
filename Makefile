@@ -26,6 +26,10 @@ build-cerbero:
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc build fluidsynth
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc build fluidsynth
 
+buildone-cerbero:
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc buildone fluidsynth
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc buildone fluidsynth
+
 clean:
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc cleanone fluidsynth
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc cleanone fluidsynth
