@@ -1,10 +1,12 @@
 
 CENV=CERBERO_LOCAL_CONFIG=../../custom.cbc
 
+CERBERO=external/cerbero
+
 all: build
 
 .PHONY: prepare
-prepare: external/cerbero
+prepare: $(CERBERO)
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc bootstrap
 
 external/cerbero:
@@ -22,19 +24,18 @@ prepare-copy: build-cerbero
 	cp build/dist/android_armv7/lib/*.so libs/armeabi-v7a
 	cp build/dist/android_x86/lib/*.so libs/x86
 
-build-cerbero:
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc build fluidsynth
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc build fluidsynth
+build-cerbero: $(CERBERO)
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc build $(BUILD_ARGS) fluidsynth
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc build $(BUILD_ARGS) fluidsynth
 
-buildone-cerbero:
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc buildone fluidsynth
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc buildone fluidsynth
+buildone-cerbero: $(CERBERO)
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc buildone fluidsynth $(BUILD_ARGS)
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc buildone fluidsynth $(BUILD_ARGS)
 
-clean:
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc cleanone fluidsynth
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc cleanone fluidsynth
-	rm -rf libs
+clean-cerbero: $(CERBERO)
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc clean fluidsynth
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc clean fluidsynth
 
-distclean:
+distclean: $(CERBERO)
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc wipe --build-tools
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc wipe --build-tools
