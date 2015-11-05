@@ -8,6 +8,7 @@ all: build
 .PHONY: prepare
 prepare: $(CERBERO)
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc bootstrap
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc bootstrap
 
 external/cerbero:
 	git submodule init
@@ -25,17 +26,17 @@ prepare-copy: build-cerbero
 	cp build/dist/android_x86/lib/*.so libs/x86
 
 build-cerbero: $(CERBERO)
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc build $(BUILD_ARGS) fluidsynth
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc build $(BUILD_ARGS) fluidsynth
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc build $(BUILD_ARGS) fluidsynth
 
 buildone-cerbero: $(CERBERO)
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc buildone fluidsynth $(BUILD_ARGS)
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc buildone fluidsynth $(BUILD_ARGS)
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc buildone fluidsynth $(BUILD_ARGS)
 
 clean-cerbero: $(CERBERO)
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc clean fluidsynth
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc clean fluidsynth
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc clean fluidsynth
 
 distclean: $(CERBERO)
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc wipe --build-tools
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc wipe --build-tools
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc wipe --build-tools
