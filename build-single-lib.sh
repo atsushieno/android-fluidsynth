@@ -8,13 +8,14 @@ export ANDROID_VER=21 # 3 4 5 8 9 14 21
 export TOOLFAMILY=4.9 # 4.8 or 4.9 or clang-3.1
 export SYSROOT=$ANDROID_NDK_PATH/platforms/android-$ANDROID_VER/arch-$ARCH4
 export CC="$ANDROID_NDK_PATH/toolchains/$ARCH-$TOOLFAMILY/prebuilt/$BUILD_OS/bin/$ARCH2-g++ --sysroot=$SYSROOT -fno-stack-protector"
-export LD="$ANDROID_NDK_PATH/toolchains/$ARCH-$TOOLFAMILY/prebuilt/$BUILD_OS/bin/$ARCH2-g++ --sysroot=$SYSROOT -Wl,-rpath-link=$SYSROOT/usr/lib/ -L$SYSROOT/usr/lib/ -lc"
+export LD="$ANDROID_NDK_PATH/toolchains/$ARCH-$TOOLFAMILY/prebuilt/$BUILD_OS/bin/$ARCH2-g++ --sysroot=$SYSROOT"
 export TARGET_LIBRARY=libfluidsynth
 
 export LIB_DIR=build/dist/android_$ARCH3/lib
+export LIBS_FULLLINK="\
+	$LIB_DIR/libfluidsynth.a"
 export LIBS="\
 	$LIB_DIR/libffi.a \
-	$LIB_DIR/libfluidsynth.a \
 	$LIB_DIR/libgio-2.0.a \
 	$LIB_DIR/libglib-2.0.a \
 	$LIB_DIR/libgmodule-2.0.a \
@@ -33,5 +34,5 @@ export LIBS="\
 #make
 
 $CC dso_handle.c -c -o dso_handle.o
-$LD -nostdlib -shared -s -o libfluidsynth.so -Wl,-soname,libfluidsynth.so -Wl,-whole-archive -fno-stack-protector -lc $LIBS dso_handle.o
+$LD -nostdlib -shared -s -o libfluidsynth.so -Wl,-soname,libfluidsynth.so -fno-stack-protector -lc $LIBS dso_handle.o -Wl,-whole-archive $LIBS_FULLLINK
 
