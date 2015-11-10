@@ -1,14 +1,30 @@
 LOCAL_PATH := $(call my-dir)
 TARGET_PLATFORM := android-21
 
-include $(CLEAR_VARS)
-
-LOCAL_MODULE := fluidsynth
-
 TARGET_ARCH_DIR = android_$(TARGET_ARCH)
 DIST = build/dist/$(TARGET_ARCH_DIR)
 FL_SRC = ../build/sources/$(TARGET_ARCH_DIR)/fluidsynth-1.1.6/fluidsynth/src
 FL_INC = build/sources/$(TARGET_ARCH_DIR)/fluidsynth-1.1.6/fluidsynth/src
+GLIB_LIB = ../build/dist/$(TARGET_ARCH_DIR)/lib/
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := glib-2.0
+LOCAL_SRC_FILES := $(GLIB_LIB)/libglib-2.0.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := iconv
+LOCAL_SRC_FILES := $(GLIB_LIB)/libiconv.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := intl 
+LOCAL_SRC_FILES := $(GLIB_LIB)/libintl.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := fluidsynth
 
 LOCAL_CFLAGS := \
 	-DOPENSLES_SUPPORT \
@@ -69,7 +85,9 @@ LOCAL_SRC_FILES := \
 	$(FL_SRC)/midi/fluid_seqbind.c \
 	$(FL_SRC)/midi/fluid_midi.c
 
-LOCAL_LDLIBS := -lc -lOpenSLES -ldl -llog -landroid -L$(DIST)/lib/ -lglib-2.0
+LOCAL_STATIC_LIBRARIES := glib-2.0 iconv intl
+
+LOCAL_LDLIBS := -lc -lOpenSLES -ldl -llog -landroid
 
 include $(BUILD_SHARED_LIBRARY)
 
