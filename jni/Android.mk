@@ -25,6 +25,7 @@ include $(PREBUILT_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := fluidsynth
+#LOCAL_MODULE := fluidsynth_static
 
 LOCAL_CFLAGS := \
 	-g -O0 \
@@ -89,6 +90,15 @@ LOCAL_SRC_FILES := \
 LOCAL_STATIC_LIBRARIES := glib-2.0 iconv intl
 
 LOCAL_LDLIBS := -lc -lOpenSLES -ldl -llog -landroid
+
+#include $(BUILD_STATIC_LIBRARY)
+
+#include $(CLEAR_VARS)
+
+#LOCAL_MODULE := fluidsynth
+#LOCAL_STATIC_LIBRARIES =
+#LOCAL_WHOLE_STATIC_LIBRARIES := fluidsynth_static
+#LOCAL_LDLIBS := -lc -lOpenSLES -ldl -llog -landroid
 
 include $(BUILD_SHARED_LIBRARY)
 

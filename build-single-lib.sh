@@ -7,8 +7,8 @@ export ANDROID_VER=21 # 3 4 5 8 9 14 21
 #export ARCH4=arm #arm or arm64 or x86 or x86_64
 export TOOLFAMILY=4.9 # 4.8 or 4.9 or clang-3.1
 export SYSROOT=$ANDROID_NDK_PATH/platforms/android-$ANDROID_VER/arch-$ARCH4
-export CC="$ANDROID_NDK_PATH/toolchains/$ARCH-$TOOLFAMILY/prebuilt/$BUILD_OS/bin/$ARCH2-g++ --sysroot=$SYSROOT -fno-stack-protector"
-export LD="$ANDROID_NDK_PATH/toolchains/$ARCH-$TOOLFAMILY/prebuilt/$BUILD_OS/bin/$ARCH2-g++ --sysroot=$SYSROOT"
+export CC="$ANDROID_NDK_PATH/toolchains/$ARCH-$TOOLFAMILY/prebuilt/$BUILD_OS/bin/$ARCH2-g++ --sysroot=$SYSROOT -fno-stack-protector -g -O0"
+export LD="$ANDROID_NDK_PATH/toolchains/$ARCH-$TOOLFAMILY/prebuilt/$BUILD_OS/bin/$ARCH2-g++ --sysroot=$SYSROOT -g -O0"
 export TARGET_LIBRARY=libfluidsynth
 
 export LIB_DIR=build/dist/android_$ARCH3/lib
