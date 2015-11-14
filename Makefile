@@ -23,8 +23,6 @@ build: prepare-copy
 prepare-copy: build-cerbero
 	mkdir -p libs/armeabi-v7a
 	mkdir -p libs/x86
-	cp build/dist/android_armv7/lib/*.so libs/armeabi-v7a
-	cp build/dist/android_x86/lib/*.so libs/x86
 	echo on
 	#ARCH=arm-linux-androideabi ARCH2=arm-linux-androideabi ARCH3=armv7 ARCH4=arm ./build-single-lib.sh
 	#cp libfluidsynth.so libs/armeabi-v7a
@@ -34,6 +32,8 @@ prepare-copy: build-cerbero
 	#~/android-ndk-r10e/ndk-build TARGET_ARCH=armv7 APP_ABI=armeabi-v7a
 	~/android-ndk-r10e/ndk-build TARGET_ARCH=x86 APP_ABI=x86
 	cp obj/local/x86/libfluidsynth.so libs/x86
+	cp build/dist/android_armv7/lib/*.so libs/armeabi-v7a
+	#cp build/dist/android_x86/lib/*.so libs/x86
 
 build-cerbero: $(CERBERO)
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc build $(BUILD_ARGS) fluidsynth
