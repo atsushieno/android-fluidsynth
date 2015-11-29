@@ -6,4 +6,4 @@
 	url = https://github.com/taka-no-me/android-cmake.git
 [submodule "external/cerbero"]
 	path = external/cerbero
-	url = https://gitcafe.com/atsushieno/cerbero.git
+	url = https://github.com/atsushieno/cerbero.git
