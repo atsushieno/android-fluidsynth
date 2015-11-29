@@ -30,6 +30,13 @@ fluidsynth that is checked out by cerbero.
 Finally, as part of an attempt to build libfluidsynth.so that does not
 depend on any other libraries, run ./build-single-lib.sh.
 
+Missing
+-------
+
+There is no JNI bridge in Java because no one had implemented it.
+I'm using Xamarin and my nfluidsynth project, so I don't need JNI interop.
+Contributions are welcome.
+
 Hacking
 -------
 
