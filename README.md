@@ -64,3 +64,25 @@ Also, note that the sources you should make changes are of the target
 specific architecture e.g. build/sources/android\_armv7/fluidsynth-1.1.16/
 and not build/sources/local. It is ignored when you run "buildone".
 
+Here is my workflow:
+
+- make changes under build/sources/android_x86/fluidsynth-1.1.6
+  (under android_x86, NOT under build/sources/local/fluidsynth:
+  I don't want fullbuilds triggered by making changes there.)
+- run make. It will build x86 and arm binaries (ndk-build for x86,
+  binary-hack for arm)
+- When I'm ready to commit and push the changes:
+  - `cd build/sources/android_x86/fluidsynth-1.1.6`
+  - `git diff > tmp.patch`
+  - `mv tmp.patch ../../local/fluidsynth`
+  - `patch -i tmp.patch -p1`
+  - `cd ../../local/fluidsynth`
+  - For the first time:
+    - `git checkout master`
+    - edit .git/config and point to my committable URL.
+  - `git commit -a`
+  - `git push origin master`
+  - Make sure that the worktree has the latest git commits i.e.
+    - `cd ../../android_x86_fluidsynth_1.1.6`
+    - `git checkout master`
+    - `git pull`
