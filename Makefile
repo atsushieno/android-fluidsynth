@@ -21,7 +21,7 @@ x86shortcut: ndk-build-x86
 
 binaryhack-full: build-cerbero binaryhack
 build-single-lib-full: build-cerbero build-single-lib
-ndk-build-full: build-cerbero ndk-buil
+ndk-build-full: build-cerbero ndk-build
 
 
 binaryhack: binaryhack-arm binaryhack-x86
