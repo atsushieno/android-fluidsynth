@@ -3,6 +3,8 @@ CENV=CERBERO_LOCAL_CONFIG=../../custom.cbc
 
 CERBERO=external/cerbero
 
+ANDROID_NDK=~/android-ndk-r11
+
 all: build
 
 .PHONY: prepare
@@ -51,11 +53,11 @@ build-single-lib-x86:
 ndk-build: ndk-build-arm ndk-build-x86
 
 ndk-build-arm:
-	~/android-ndk-r10e/ndk-build TARGET_ARCH=armv7 APP_ABI=armeabi-v7a
+	$(ANDROID_NDK)/ndk-build TARGET_ARCH=armv7 APP_ABI=armeabi-v7a
 	cp obj/local/armeabi-v7a/libfluidsynth.so libs/x86
 
 ndk-build-x86:
-	~/android-ndk-r10e/ndk-build TARGET_ARCH=x86 APP_ABI=x86
+	$(ANDROID_NDK)/ndk-build TARGET_ARCH=x86 APP_ABI=x86
 	cp obj/local/x86/libfluidsynth.so libs/x86
 
 
