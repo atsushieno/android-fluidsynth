@@ -3,7 +3,7 @@ CENV=CERBERO_LOCAL_CONFIG=../../custom.cbc
 
 CERBERO=external/cerbero
 
-ANDROID_NDK=~/android-ndk-r11
+ANDROID_NDK=~/android-ndk-r13
 
 all: build
 
