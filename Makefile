@@ -3,7 +3,7 @@ CENV=CERBERO_LOCAL_CONFIG=../../custom.cbc
 
 CERBERO=external/cerbero
 
-ANDROID_NDK=~/android-ndk-r13
+ANDROID_NDK=~/android-ndk-r15b
 
 all: build
 
@@ -17,7 +17,7 @@ $(CERBERO):
 	git submodule update --recursive
 
 .PHONY: build
-build: build-cerbero ndk-build-x86 binaryhack-arm
+build: build-cerbero ndk-build-x86 ndk-build-arm
 
 x86shortcut: ndk-build-x86
 
@@ -53,11 +53,11 @@ build-single-lib-x86:
 ndk-build: ndk-build-arm ndk-build-x86
 
 ndk-build-arm:
-	$(ANDROID_NDK)/ndk-build TARGET_ARCH=armv7 APP_ABI=armeabi-v7a
+	$(ANDROID_NDK)/ndk-build CUSTOM_ARCH=armv7 APP_ABI=armeabi-v7a
 	cp obj/local/armeabi-v7a/libfluidsynth.so libs/x86
 
 ndk-build-x86:
-	$(ANDROID_NDK)/ndk-build TARGET_ARCH=x86 APP_ABI=x86
+	$(ANDROID_NDK)/ndk-build CUSTOM_ARCH=x86 APP_ABI=x86
 	cp obj/local/x86/libfluidsynth.so libs/x86
 
 

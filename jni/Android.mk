@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 TARGET_PLATFORM := android-21
 
-TARGET_ARCH_DIR = android_$(TARGET_ARCH)
+TARGET_ARCH_DIR = android_$(CUSTOM_ARCH)
 DIST = build/dist/$(TARGET_ARCH_DIR)
 FL_SRC = ../build/sources/$(TARGET_ARCH_DIR)/fluidsynth-1.1.6/fluidsynth/src
 FL_INC = build/sources/$(TARGET_ARCH_DIR)/fluidsynth-1.1.6/fluidsynth/src
