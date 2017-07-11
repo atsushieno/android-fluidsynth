@@ -2,7 +2,7 @@ build:
   box:
     id: gcr.io/eno-c92-android-review/github-atsushieno-android-fluidsynth
     username: _json_key
-    password: $GCR_JSON_KEY_FILE
+    password: ${GCR_JSON_KEY_FILE}
     registry: https://gcr.io
     tag: c2fbb64eb4ac071aa9171744aeca88cd47e3a523
 
@@ -17,13 +17,13 @@ steps:
   - script:
     name: assemble and verify
     code: |
-      ./gradlew --stacktrace --console=plain assemble testDebugUnitTest lintDebug
+      make prepare all
 
 after-steps:
   - script:
       name: collect build artifacts
       code: |
-	find libs
+        find libs
         cp -r ./libs ${WERCKER_REPORT_ARTIFACTS_DIR}
 
 
