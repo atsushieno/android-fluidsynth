@@ -1,0 +1,30 @@
+build:
+  box:
+    id: gcr.io/eno-c92-android-review/github-atsushieno-android-fluidsynth
+    username: _json_key
+    password: $GCR_JSON_KEY_FILE
+    registry: https://gcr.io
+    tag: c2fbb64eb4ac071aa9171744aeca88cd47e3a523
+
+steps:
+  - script:
+    name: accept android licenses
+    code: |
+      mkdir -p ${ANDROID_HOME}/licenses/
+      echo -n 8933bad161af4178b1185d1a37fbf41ea5269c55 > ${ANDROID_HOME}/licenses/android-sdk-license
+      echo -n 84831b9409646a918e30573bab4c9c91346d8abd > ${ANDROID_HOME}/licenses/android-sdk-preview-license
+      echo -n e9acab5b5fbb560a72cfaecce8946896ff6aab9d > ${ANDROID_HOME}/licenses/mips-android-sysimage-license
+  - script:
+    name: assemble and verify
+    code: |
+      ./gradlew --stacktrace --console=plain assemble testDebugUnitTest lintDebug
+
+after-steps:
+  - script:
+      name: collect build artifacts
+      code: |
+        ls -la ./app/build/outputs/
+        cp -r ./app/build/outputs/* ${WERCKER_REPORT_ARTIFACTS_DIR}
+        cp -r ./app/build/reports/* ${WERCKER_REPORT_ARTIFACTS_DIR}
+
+
