@@ -23,8 +23,7 @@ after-steps:
   - script:
       name: collect build artifacts
       code: |
-        ls -la ./app/build/outputs/
-        cp -r ./app/build/outputs/* ${WERCKER_REPORT_ARTIFACTS_DIR}
-        cp -r ./app/build/reports/* ${WERCKER_REPORT_ARTIFACTS_DIR}
+	find libs
+        cp -r ./libs ${WERCKER_REPORT_ARTIFACTS_DIR}
 
 
