@@ -1,29 +1,23 @@
 build:
   box:
-    id: gcr.io/eno-c92-android-review/github-atsushieno-android-fluidsynth
-    username: _json_key
-    password: ${GCR_JSON_KEY_FILE}
-    registry: https://gcr.io
-    tag: c2fbb64eb4ac071aa9171744aeca88cd47e3a523
+    id: bitriseio/android-ndk
+    tag: v2017_07_29-08_50-b607
 
-steps:
-  - script:
-    name: accept android licenses
-    code: |
-      mkdir -p ${ANDROID_HOME}/licenses/
-      echo -n 8933bad161af4178b1185d1a37fbf41ea5269c55 > ${ANDROID_HOME}/licenses/android-sdk-license
-      echo -n 84831b9409646a918e30573bab4c9c91346d8abd > ${ANDROID_HOME}/licenses/android-sdk-preview-license
-      echo -n e9acab5b5fbb560a72cfaecce8946896ff6aab9d > ${ANDROID_HOME}/licenses/mips-android-sysimage-license
-  - script:
-    name: assemble and verify
-    code: |
-      make prepare all
+  steps:
+    - script:
+      name: set up submodules
+      code: |
+        git submodule init
+        git submodule update
+    - script:
+      name: assemble and verify
+      code: |
+        ANDROID_NDK_PATH=/opt/android-ndk echo -n Y | make prepare all
 
-after-steps:
-  - script:
+deploy:
+  steps:
+    - script:
       name: collect build artifacts
       code: |
-        find libs
         cp -r ./libs ${WERCKER_REPORT_ARTIFACTS_DIR}
-
 
