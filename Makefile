@@ -3,7 +3,7 @@ CENV=CERBERO_LOCAL_CONFIG=../../custom.cbc
 
 CERBERO=external/cerbero
 
-ANDROID_NDK=~/android-ndk-r15b
+ANDROID_NDK=~/android-ndk-r16b
 
 all: build
 
@@ -80,8 +80,8 @@ buildone-cerbero-x86: $(CERBERO)
 
 
 clean-cerbero: $(CERBERO)
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc clean fluidsynth
-	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc clean fluidsynth
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc cleanone fluidsynth
+	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-armv7.cbc cleanone fluidsynth
 
 distclean: $(CERBERO)
 	cd external/cerbero && $(CENV) ./cerbero-uninstalled -c config/cross-android-x86.cbc wipe --build-tools
