@@ -17,6 +17,8 @@ to build libraries for Android and laying out the outcome is messy.
 Also, the resulting binaries need some binary fixups.
 So this build script also takes care of it.
 
+I posted some introduction and rationale stories here: https://dev.to/atsushieno/fluidsynth-for-android--269i
+
 Usage
 -----
 
