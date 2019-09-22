@@ -20,10 +20,11 @@ steps:
       make prepare all
 
 after-steps:
-  - script:
+  - script:xXxX
       name: collect build artifacts
       code: |
         find libs
         cp -r ./libs ${WERCKER_REPORT_ARTIFACTS_DIR}
 
 
+060
